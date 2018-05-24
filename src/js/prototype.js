@@ -13,13 +13,13 @@ tomas = Object.create(User).constructor('tomas');
 tomas.sayHello();
 
 const WebDeveloper = Object.create(User);
-WebDeveloper.constructor = (name, skills) => {
+WebDeveloper.constructor = function (name, skills) {
 	User.constructor.apply(this, arguments);
-	this.skills = skills;
-
+	this.skills = skills || [];
 	return this;
 };
-WebDeveloper.getSkills = () => {
+
+WebDeveloper.getSkills = function() {
 	console.log(this.skills);
 };
 
@@ -27,5 +27,7 @@ const JackDeveloper = Object.create(WebDeveloper).constructor('Jack', [
 	'nodeJS', 'php'
 ]);
 
-JackDeveloper.sayHello().getSkills();
+JackDeveloper.sayHello();
+JackDeveloper.getSkills();
+
 
