@@ -1,2 +1,11 @@
-// require('./links.js');
+// require('./test.js');
+console.log('------');
+require('./closures.js');
+console.log('------');
+require('./context.js');
+console.log('------');
+require('./scope.js');
+console.log('------');
 require('./prototype.js');
+console.log('------');
+require('./links.js');

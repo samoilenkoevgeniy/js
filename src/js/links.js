@@ -11,3 +11,13 @@ let bar = foo;
 foo.x = 20;
 
 console.log(bar.x); // 20
+
+
+let person = {
+	name: 'bob',
+	greet: function() {
+		console.log(`Hello, I'm ${this.name}`)
+	}
+};
+
+person.greet();
