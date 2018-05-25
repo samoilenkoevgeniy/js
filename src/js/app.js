@@ -1,4 +1,5 @@
-// require('./test.js');
+require('./test.js');
+console.log('------');
 require('./inheritance.js');
 console.log('------');
 require('./closures.js');
