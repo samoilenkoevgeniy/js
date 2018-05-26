@@ -1,23 +1,12 @@
 const path = require('path');
-const webpack = require('webpack');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
-const entries = [
-	'./src/js/app.js'
-];
 
 const NODE_ENV = process.env.NODE_ENV || 'dev';
 
 const optionsLiveReload = {};
 
-module.exports = {
-	entry: entries,
-	output: {
-		filename: 'bundle.js',
-		path: path.resolve(__dirname, './bundles')
-	},
-
+const config = {
 	module: {
 		rules: [
 			{
@@ -49,18 +38,28 @@ module.exports = {
 
 	plugins: [
 		new LiveReloadPlugin(optionsLiveReload)
-		// new webpack.ProvidePlugin({
-		// 	$: 'jquery',
-		// 	jQuery: "jquery",
-		// 	"window.jQuery": "jquery"
-		// }),
-		// new webpack.DefinePlugin('NODE_ENV'),
-		// new ExtractTextPlugin('bundle.css')
 	],
-
-	watch: NODE_ENV === 'dev',
-	watchOptions: {
-		aggregateTimeout: 100
-	},
 	devtool: NODE_ENV === 'dev' ? 'source-map' : null
 };
+
+const appConfig = Object.assign({}, config, {
+	name: 'app',
+	entry: './src/js/app.js',
+	output: {
+		filename: 'bundle.js',
+		path: path.resolve(__dirname, './bundles')
+	}
+});
+
+const gameConfig = Object.assign({}, config, {
+	name: 'game',
+	entry: './src/js/game.js',
+	output: {
+		filename: 'bundle_game.js',
+		path: path.resolve(__dirname, './bundles')
+	}
+});
+
+module.exports = [
+	appConfig, gameConfig
+];
