@@ -75,10 +75,12 @@ const calcConfig = Object.assign({}, config, {
 			'./src/js/calc.js',
 			'./src/styles/calc.scss'
 		],
-		another: './node_modules/chart.js/src/chart.js'
+		another: [
+			'./node_modules/chart.js/src/chart.js',
+		]
 	},
 	output: {
-		filename: '[name].bundle.js',
+		filename: '[name].calc.bundle.js',
 		path: path.resolve(__dirname, './bundles')
 	}
 });
@@ -86,9 +88,3 @@ const calcConfig = Object.assign({}, config, {
 module.exports = [
 	appConfig, gameConfig, calcConfig
 ];
-
-/*
-*
-* './node_modules/chart.js/src/chart.js',
-		'./src/js/calc.js',
-		'./src/styles/calc.scss',*/

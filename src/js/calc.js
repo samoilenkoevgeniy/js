@@ -1,7 +1,7 @@
-
-
 const calc = {
 
+	ctx: document.getElementById('chart').getContext('2d'),
+	chart: null,
 	fields: [
 		'credit_amount',
 		'percentage',
@@ -13,14 +13,15 @@ const calc = {
 		this.fields.forEach(item => {
 			document.getElementById(item).addEventListener('change', (e) => {
 				this.data[item] = e.target.value;
-
 				calc.calculate();
 			})
 		});
 
-		this.data.__proto__.sum = () => {
-			console.log(this);
-		}
+		this.chart = new Chart(this.ctx, {
+			type: 'pie',
+			data: {},
+			options: {}
+		});
 	},
 
 	calculate() {
@@ -30,30 +31,29 @@ const calc = {
 
 		const _per_month_percentage = (percentage / 100) / 12;
 
-		const ann_pay_per_month = credit_amount *
+		const _ann_pay_per_month = credit_amount *
 			((_per_month_percentage * Math.pow((1 + _per_month_percentage), period)) /
 				(Math.pow((1 + _per_month_percentage), period) - 1));
+
+		const _all_pays = _ann_pay_per_month * period;
+
+		const _overpay = _all_pays - credit_amount;
+
+		this.chart.data = {
+			labels: [
+				"Сумма займа", "Переплата"
+			],
+			datasets: [{
+				label: '',
+				data: [credit_amount, _overpay],
+				backgroundColor: [
+					'#ff6384',
+					'#36a2eb'
+				]
+			}]
+		};
+		this.chart.update();
 	}
 };
 
 calc.init();
-
-var ctx = document.getElementById('chart').getContext('2d');
-var chart = new Chart(ctx, {
-	// The type of chart we want to create
-	type: 'line',
-
-	// The data for our dataset
-	data: {
-		labels: ["January", "February", "March", "April", "May", "June", "July"],
-		datasets: [{
-			label: "My First dataset",
-			backgroundColor: 'rgb(255, 99, 132)',
-			borderColor: 'rgb(255, 99, 132)',
-			data: [0, 10, 5, 2, 20, 30, 45],
-		}]
-	},
-
-	// Configuration options go here
-	options: {}
-});
