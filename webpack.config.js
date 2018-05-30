@@ -4,12 +4,13 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const NODE_ENV = process.env.NODE_ENV || 'dev';
-const devMode = NODE_ENV === 'dev';
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const devMode = NODE_ENV === 'development';
 
 const optionsLiveReload = {};
 
 const config = {
+	mode: NODE_ENV,
 	module: {
 		rules: [
 			{
@@ -42,13 +43,11 @@ const config = {
 	plugins: [
 		new LiveReloadPlugin(optionsLiveReload),
 		new MiniCssExtractPlugin({
-			// Options similar to the same options in webpackOptions.output
-			// both options are optional
 			filename: devMode ? '[name].css' : '[name].[hash].css',
 			chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
 		})
 	],
-	devtool: devMode ? 'source-map' : null
+	devtool: devMode ? 'source-map' : false
 };
 
 const appConfig = Object.assign({}, config, {
@@ -71,12 +70,15 @@ const gameConfig = Object.assign({}, config, {
 
 const calcConfig = Object.assign({}, config, {
 	name: 'calc',
-	entry: [
-		'./src/js/calc.js',
-		'./src/styles/calc.scss',
-	],
+	entry: {
+		index: [
+			'./src/js/calc.js',
+			'./src/styles/calc.scss'
+		],
+		another: './node_modules/chart.js/src/chart.js'
+	},
 	output: {
-		filename: 'bundle_calc.js',
+		filename: '[name].bundle.js',
 		path: path.resolve(__dirname, './bundles')
 	}
 });
@@ -84,3 +86,9 @@ const calcConfig = Object.assign({}, config, {
 module.exports = [
 	appConfig, gameConfig, calcConfig
 ];
+
+/*
+*
+* './node_modules/chart.js/src/chart.js',
+		'./src/js/calc.js',
+		'./src/styles/calc.scss',*/
