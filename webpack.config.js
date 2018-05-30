@@ -2,7 +2,10 @@ const path = require('path');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 const NODE_ENV = process.env.NODE_ENV || 'dev';
+const devMode = NODE_ENV === 'dev';
 
 const optionsLiveReload = {};
 
@@ -15,17 +18,17 @@ const config = {
 				use: ['babel-loader']
 			},
 			{
-				test: /\.(scss|css)$/,
-				loader: ExtractTextPlugin.extract({
-					fallback: "style-loader",
-					use: "css-loader!sass-loader",
-				})
+				test: /\.s?[ac]ss$/,
+				use: [
+					devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+					'css-loader',
+					'sass-loader',
+				],
 			},
 			{
 				test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
 				loader: 'url-loader?limit=100000'
 			},
-			// font-awesome
 			{
 				test: /font-awesome\.config\.js/,
 				use: [
@@ -37,14 +40,20 @@ const config = {
 	},
 
 	plugins: [
-		new LiveReloadPlugin(optionsLiveReload)
+		new LiveReloadPlugin(optionsLiveReload),
+		new MiniCssExtractPlugin({
+			// Options similar to the same options in webpackOptions.output
+			// both options are optional
+			filename: devMode ? '[name].css' : '[name].[hash].css',
+			chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+		})
 	],
-	devtool: NODE_ENV === 'dev' ? 'source-map' : null
+	devtool: devMode ? 'source-map' : null
 };
 
 const appConfig = Object.assign({}, config, {
 	name: 'app',
-	entry: './src/js/app.js',
+	entry: path.resolve(__dirname, './src/js/app.js'),
 	output: {
 		filename: 'bundle.js',
 		path: path.resolve(__dirname, './bundles')
@@ -60,6 +69,18 @@ const gameConfig = Object.assign({}, config, {
 	}
 });
 
+const calcConfig = Object.assign({}, config, {
+	name: 'calc',
+	entry: [
+		'./src/js/calc.js',
+		'./src/styles/calc.scss',
+	],
+	output: {
+		filename: 'bundle_calc.js',
+		path: path.resolve(__dirname, './bundles')
+	}
+});
+
 module.exports = [
-	appConfig, gameConfig
+	appConfig, gameConfig, calcConfig
 ];

@@ -1,0 +1,1 @@
+npm i && npm i webpack-cli
