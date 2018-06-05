@@ -1,3 +1,5 @@
+require('./timeouts.js');
+console.log('------');
 require('./test.js');
 console.log('------');
 require('./inheritance.js');
