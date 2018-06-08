@@ -1,3 +1,5 @@
+require('./stacked_call.js');
+console.log('------');
 require('./timeouts.js');
 console.log('------');
 require('./test.js');
