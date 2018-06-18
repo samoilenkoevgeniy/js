@@ -3,6 +3,7 @@ const calc = {
 	ctx: document.getElementById('chart').getContext('2d'),
 	chart: null,
 	fields: [
+		'first_pay',
 		'credit_amount',
 		'percentage',
 		'period',
@@ -25,18 +26,14 @@ const calc = {
 	},
 
 	calculate() {
-		let {credit_amount, percentage, period} = this.data;
-
-		percentage = parseInt(percentage);
-
+		let {credit_amount, percentage, period, first_pay} = this.data;
+		credit_amount -= first_pay;
+		percentage = parseFloat(percentage);
 		const _per_month_percentage = (percentage / 100) / 12;
-
 		const _ann_pay_per_month = credit_amount *
 			((_per_month_percentage * Math.pow((1 + _per_month_percentage), period)) /
 				(Math.pow((1 + _per_month_percentage), period) - 1));
-
 		const _all_pays = _ann_pay_per_month * period;
-
 		const _overpay = _all_pays - credit_amount;
 
 		this.chart.data = {
