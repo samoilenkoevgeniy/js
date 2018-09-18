@@ -2,7 +2,7 @@
 // console.log('------');
 // require('./timeouts.js');
 // console.log('------');
-require('./test.js');
+// require('./test.js');
 // console.log('------');
 // require('./inheritance.js');
 // console.log('------');
@@ -15,3 +15,16 @@ require('./test.js');
 // require('./prototype.js');
 // console.log('------');
 // require('./links.js');
+
+const valid = "[{(())}]";
+const valid1 = "[(){}()]";
+const valid2 = "[({(}))]";
+const inValid = "[{())}]";
+
+function balanced(str) {
+	for (let i = 0; i < str.length; i++) {
+		console.log(str[i]);
+	}
+}
+
+balanced(valid1);
