@@ -16,3 +16,6 @@ let sum = (arg) => {
 };
 
 console.log(sum(3)(3)(3)(3));
+
+// worked
+// const sum = (a, f = (b) => sum(a + b)) => ((f.valueOf = () => a), f);

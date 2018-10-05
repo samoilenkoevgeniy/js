@@ -5,3 +5,13 @@ let foo = function() {
 foo.call({
 	name: 'bob'
 });
+
+console.log('---------------');
+
+let user = {
+	sayHi: function() {
+		console.log(this);
+	}
+};
+
+(user.sayHi())();

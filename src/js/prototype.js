@@ -31,3 +31,7 @@ JackDeveloper.sayHello();
 JackDeveloper.getSkills();
 
 
+console.log('----------------');
+
+let arr = [1, 2, 3];
+arr.something = 5;
