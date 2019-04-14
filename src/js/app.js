@@ -15,7 +15,8 @@
 // require('./prototype.js');
 // console.log('------');
 // require('./links.js');
-require('./reverse.js');
+// require('./reverse.js');
+require('./carrying.js');
 
 
 // const obj = {
