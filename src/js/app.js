@@ -16,3 +16,16 @@
 // console.log('------');
 // require('./links.js');
 require('./reverse.js');
+
+
+// const obj = {
+// 	name: 'ivan'
+// };
+//
+// function sayHi() {
+// 	console.log(this.name);
+// }
+//
+// obj.sayHi = sayHi;
+//
+// obj.sayHi();
