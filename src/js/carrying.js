@@ -6,4 +6,4 @@ const helloGreeting = greeting.bind(null, "Hello");
 const hiGreeting = greeting.bind(null, "Hi");
 
 console.log(helloGreeting('Vasya!'));
-console.log(helloGreeting('Tanya!'));
+console.log(hiGreeting('Tanya!'));

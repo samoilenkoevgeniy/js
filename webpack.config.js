@@ -68,23 +68,23 @@ const gameConfig = Object.assign({}, config, {
 	}
 });
 
-const calcConfig = Object.assign({}, config, {
-	name: 'calc',
-	entry: {
-		index: [
-			'./src/js/calc.js',
-			'./src/styles/calc.scss'
-		],
-		another: [
-			'./node_modules/chart.js/src/chart.js',
-		]
-	},
-	output: {
-		filename: '[name].calc.bundle.js',
-		path: path.resolve(__dirname, './bundles')
-	}
-});
+// const calcConfig = Object.assign({}, config, {
+// 	name: 'calc',
+// 	entry: {
+// 		index: [
+// 			'./src/js/calc.js',
+// 			'./src/styles/calc.scss'
+// 		],
+// 		another: [
+// 			'./node_modules/chart.js/src/chart.js',
+// 		]
+// 	},
+// 	output: {
+// 		filename: '[name].calc.bundle.js',
+// 		path: path.resolve(__dirname, './bundles')
+// 	}
+// });
 
 module.exports = [
-	appConfig, gameConfig, calcConfig
+	appConfig, gameConfig
 ];
