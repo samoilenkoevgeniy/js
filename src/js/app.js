@@ -16,9 +16,9 @@
 // console.log('------');
 // require('./links.js');
 // require('./reverse.js');
-require('./monthIncome.js');
-
-
+// require('./monthIncome.js');
+// require('./complexity.js');
+require('./sort.js');
 // const obj = {
 // 	name: 'ivan'
 // };
